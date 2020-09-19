@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
 import Flight from './components/Flight';
+import Header from './components/Header'
+import IndividualLaunch from './components/IndividualLaunch';
+import {BrowserRouter as Router,Switch,Route, BrowserRouter} from 'react-router-dom';
+
+
 export class App extends Component {
   constructor(){
     super()
@@ -22,15 +27,23 @@ export class App extends Component {
      }
      sendGetRequest();
    }
+   
   render() {
-    console.log(this.state.projects[0]);
+    //console.log(this.state.projects[0]);
     return (
-      <div>
-          <h1>Hello </h1>
-           {this.state.projects.map(project=>{
-             return <Flight key={project.id} project={project}/>
-           })}
-      </div>
+      <BrowserRouter>
+           <Header />
+        
+           <Route exact path='/' render={props=>(
+             <React.Fragment>
+                {this.state.projects.map(project=>{
+                return <Flight key={project.id} project={project}/>
+                })}
+             </React.Fragment>
+           )}/>
+           <Route path='/:id' component={IndividualLaunch}/>
+           
+      </BrowserRouter>
     )
   }
 }

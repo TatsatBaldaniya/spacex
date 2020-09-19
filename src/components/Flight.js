@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import {BrowserRouter as Router,Switch,Route, BrowserRouter} from 'react-router-dom';
+import IndividualFlight from './IndividualFlight';
 
 export class Flight extends Component {
     render() {
         return (
             <div>
-                <h1>{this.props.project.flight_number}</h1>
+                <IndividualFlight individual={this.props.project} />                
             </div>
         )
     }
