@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
 import Flight from './components/Flight';
 import Header from './components/Header'
-import IndividualLaunch from './components/IndividualLaunch';
+import LaunchId from './components/LaunchId';
 import {BrowserRouter ,Switch,Route, Link} from 'react-router-dom';
 
 import FilterDate from './components/FilterDate';
 
+//Brief Idea of Components
+//Flight Component handles data about all the projects
+//IndividualFlight component renders data about single flight
+//LaunchId used to get Id of particular flight
+//IndividualLauchDetails used to get render data based on idclicked
+//IndividualLaunchDate used to render data based on start date and end date
+//Filter component for rendering start date and end date
 export class App extends Component {
   constructor(){
     super()
@@ -43,7 +50,7 @@ export class App extends Component {
              </React.Fragment>
            )}/>{/*This Route is for Home Page */}
            
-           <Route exact path='/:id' component={IndividualLaunch}/>
+           <Route exact path='/:id' component={LaunchId}/>
            <Route path='/filerDate' component={FilterDate} />
       </BrowserRouter>
     )

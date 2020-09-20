@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class Try extends Component {
+export class IndividualLaunchDetails extends Component {
  constructor(){
       super()
       this.state={
@@ -37,4 +37,4 @@ export class Try extends Component {
     }
 }
 
-export default Try
+export default IndividualLaunchDetails
