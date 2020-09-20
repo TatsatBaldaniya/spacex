@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Flight from './components/Flight';
 import Header from './components/Header'
 import IndividualLaunch from './components/IndividualLaunch';
-import {BrowserRouter as Router,Switch,Route, BrowserRouter} from 'react-router-dom';
+import {BrowserRouter ,Switch,Route, Link} from 'react-router-dom';
 
+import FilterDate from './components/FilterDate';
 
 export class App extends Component {
   constructor(){
@@ -17,7 +18,7 @@ export class App extends Component {
      const axios=require('axios').default;
      const sendGetRequest=async()=>{
        try{
-           const resp=await axios.get('https://api.spacexdata.com/v3/launches?limit=5')
+           const resp=await axios.get('https://api.spacexdata.com/v3/launches?limit=10')
            this.setState({
              projects:resp.data//all the projects with Flight number from 1 to 5
            })
@@ -33,16 +34,17 @@ export class App extends Component {
     return (
       <BrowserRouter>
            <Header />
-        
+            <Link to='/filerDate'>Filter By date</Link>
            <Route exact path='/' render={props=>(
              <React.Fragment>
                 {this.state.projects.map(project=>{
                 return <Flight key={project.id} project={project}/>
                 })}
              </React.Fragment>
-           )}/>
-           <Route path='/:id' component={IndividualLaunch}/>
+           )}/>{/*This Route is for Home Page */}
            
+           <Route exact path='/:id' component={IndividualLaunch}/>
+           <Route path='/filerDate' component={FilterDate} />
       </BrowserRouter>
     )
   }

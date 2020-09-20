@@ -6,7 +6,8 @@ export class Flight extends Component {
     render() {
         return (
             <div>
-                <IndividualFlight individual={this.props.project} />                
+                <IndividualFlight individual={this.props.project} />   
+                <hr />             
             </div>
         )
     }

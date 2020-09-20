@@ -4,10 +4,10 @@ export class Try extends Component {
  constructor(){
       super()
       this.state={
-          launchDetails:{}
+          launchDetails:{}//individual Launch Details
       }
  }
- componentDidMount(){
+ componentDidMount(){ //fetching data for a particular Flight
      const axios=require('axios').default;
      const sendGetRequest=async()=>{
          try{
@@ -25,9 +25,12 @@ export class Try extends Component {
     render() {    
         console.log(this.state.launchDetails)
         return (
-            <div>
+            <div style={{
+                display:this.state.launchDetails.flight_number===undefined?'none':'block'
+            }}>
                 <h1 style={{
-                    textAlign:'center'
+                    textAlign:'center',
+                    
                 }}>FlightNumber:{this.state.launchDetails.flight_number}</h1>
             </div>
         )
