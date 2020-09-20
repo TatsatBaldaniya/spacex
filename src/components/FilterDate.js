@@ -5,7 +5,8 @@ export class FilterDate extends Component {
         super()
         this.state={
             startDate:' ',
-            endDate:' '
+            endDate:' ',
+            launchDetails:[]
         }
     }
     handleStartDate=(e)=>{
@@ -23,8 +24,20 @@ export class FilterDate extends Component {
             endDate:e.target.value
         })
     }
-
-    render() {
+    handleClick=()=>{
+          console.log('An click event is fired');
+            fetch(`https://api.spacexdata.com/v3/launches?start=${this.state.startDate}&end=${this.state.endDate}`).
+            then(resp=>resp.json()).then((data)=>{
+                //console.log(data);
+                this.setState({
+                    launchDetails:data
+                })
+            })
+          }
+  
+    
+    render(){
+        
         return (
             <div>
                 <input type='date' id='startDate' onChange={this.handleStartDate}/>
@@ -33,8 +46,9 @@ export class FilterDate extends Component {
                 <input type='date' id='endDate' onChange={this.handleEndDate} />
                 <label for='endDate'>Enter end date</label>
                 <br />
-                <IndividualLauchDate startDate={this.state.startDate} endDate={this.state.endDate}/>                 
-
+                <button onClick={this.handleClick}>Filter</button>
+                {this.state.launchDetails.map(details=><IndividualLauchDate key={details.id} details={details}/>)}              
+                 
              </div>   
         )
     }

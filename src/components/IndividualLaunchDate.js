@@ -1,37 +1,21 @@
 import React, { Component } from 'react'
-
+import {Link} from 'react-router-dom';
 export class IndividualLaunchDate extends Component {
-    constructor(){
-        super()
-        this.state={
-            launchDetails:[]
-        }
-    }
-    componentDidMount(){
-        const api=`https://api.spacexdata.com/v3/launches/start=${this.props.startDate}&end=${this.props.endDate}`;
-        console.log(api)
-        const axios=require('axios').default
-        const sendGetRequest=async()=>{
-               try{
-                       const resp=await axios.get(api)
-                       console.log(resp.data);
-               }catch(err){
-                        console.log('ERROR');
-               }
-        }
-        sendGetRequest();
-    }
     render() {
+        const a='/'+this.props.details.flight_number;
         return (
-            <div style={{
-                display:this.props.startDate==' '||this.props.endDate==' '?'none':'block'
-            }}>
-               <h1 style={{
-                    display:this.state.launchDetails!==[]?'none':'block'
-               }}>Data Not Found</h1>
+            <div>
+                <h1>Flight Number:{this.props.details.flight_number}</h1>
+                <p style={nameStyle}>Mission_name:{this.props.details.mission_name}</p>
+                <p>LaunchYear:{this.props.details.launch_year}</p>
+                 <Link to={a}>click here for more details</Link>
+                <hr />
             </div>
         )
     }
 }
-
-export default IndividualLaunchDate
+const nameStyle={
+    fontWeight:'bold',
+    color:'yellowgreen'
+}
+export default IndividualLaunchDate;
